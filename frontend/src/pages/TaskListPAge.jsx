@@ -9,19 +9,28 @@ export default function TaskListPage() {
 
 
     const loadTasks = async () => {
-        const data = await getTasks()
-        setTasks(data)
+        try {
+            const data = await getTasks()
+            console.log("here is the data", data)
+            setTasks(data)
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
     useEffect(() => {
-        async () => await loadTasks()
+        loadTasks()
     }, [])
 
 
     const handleDelete = async (id) => {
-        await deleteTask(id)
-        loadTasks()
+        try {
+            await deleteTask(id)
+            loadTasks()
+        } catch (error) {
+            console.log(error)
+        }
     }
 
 
